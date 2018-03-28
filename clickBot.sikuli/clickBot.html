@@ -1,0 +1,155 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>clickBot.sikuli</h2> <a href="clickBot.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> time
+
+<span class="cmt"># target object (region and image)</span>
+<span class="kw">class</span> target():
+    <span class="kw">def</span> __init__(this, target, region = Region(<span class="dig">0</span>,<span class="dig">24</span>,<span class="dig">1280</span>,<span class="dig">777</span>)):
+        this.region = region
+        this.target = target
+
+    <span class="cmt"># Getters and setters</span>
+    <span class="kw">def</span> getRegion(this):
+        <span class="kw">return</span> this.region
+
+    <span class="kw">def</span> setRegion(region):
+        this.region = region
+
+    <span class="kw">def</span> getTar(this):
+        <span class="kw">return</span> this.target
+    <span class="kw">def</span> setTar(target):
+        this.target = target
+
+    <span class="kw">def</span> getLocation(this):
+        <span class="kw">return</span> this.getRegion().exists(this.getTar())
+
+
+
+<span class="cmt"># Click bot</span>
+<span class="kw">class</span> Clicker():
+    <span class="kw">def</span> __init__(this):
+        this.state = <span class="dig">0</span>
+        this.timeout = <span class="dig">1</span>
+        timer = <span class="dig">0</span>
+
+    <span class="cmt"># getters and setters</span>
+    <span class="kw">def</span> getState():
+        <span class="kw">return</span> this.state
+    <span class="kw">def</span> setState(state):
+        this.state = state
+
+
+    <span class="cmt"># helper functions</span>
+    <span class="kw">def</span> findTarget (this, target):
+        location = None
+        <span class="kw">for</span> i <span class="kw">in</span> range (this.timeout):
+            <span class="kw">if</span> target.getLocation()!= None:
+                location = target.getLocation()
+                <span class="kw">break</span>
+            <span class="cmt">#wait(1)</span>
+        <span class="kw">if</span> location:
+            <span class="kw">return</span> location
+        <span class="kw">else</span>:
+            <span class="kw">return</span> None
+
+    <span class="cmt"># timer</span>
+    <span class="kw">def</span> timerReset (this):
+        this.timer = time.time()
+    <span class="kw">def</span> getTime (this):
+        <span class="kw">return</span> time.time() - this.timer
+
+    <span class="cmt"># public methods</span>
+    <span class="kw">def</span> clickTarget( this, target, nextTarget, nextState, delay = <span class="dig">0</span>):
+
+        <span class="kw">while</span> this.state != nextState :
+            location = None
+            <span class="cmt"># find target</span>
+            location = this.findTarget(target);
+
+            <span class="cmt"># click target</span>
+            <span class="kw">if</span> location != None:
+                target.getRegion().<span class="skw">doubleClick</span>(location)
+
+            <span class="cmt"># delay</span>
+            <span class="skw">wait</span>(delay)
+
+            <span class="cmt"># check next state</span>
+            nextLocation = this.findTarget(nextTarget)
+
+            <span class="cmt"># update state</span>
+            <span class="kw">if</span> nextLocation != None:
+                this.state = nextState
+</pre>
+</body>
+</html>
