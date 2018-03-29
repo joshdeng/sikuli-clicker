@@ -7,6 +7,7 @@
 ```
 import sys
 # Script path
+# Mac OSX 
 myScriptPath = "./"
 
 # Check path
