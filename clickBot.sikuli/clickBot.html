@@ -102,12 +102,15 @@
         this.state = <span class="dig">0</span>
         this.timeout = <span class="dig">1</span>
         timer = <span class="dig">0</span>
+        this.clickType = <span class="dig">0</span>
 
     <span class="cmt"># getters and setters</span>
-    <span class="kw">def</span> getState():
+    <span class="kw">def</span> getState(this):
         <span class="kw">return</span> this.state
-    <span class="kw">def</span> setState(state):
+    <span class="kw">def</span> setState(this,state):
         this.state = state
+    <span class="kw">def</span> setType(this,clickType):
+        this.clickType = clickType
 
 
     <span class="cmt"># helper functions</span>
@@ -141,7 +144,12 @@
 
             <span class="cmt"># click target</span>
             <span class="kw">if</span> location != None:
-                target.getRegion().<span class="skw">doubleClick</span>(location)
+                <span class="kw">if</span> this.clickType == <span class="dig">0</span>:
+                    target.getRegion().<span class="skw">doubleClick</span>(location)
+                <span class="kw">elif</span> this.clickType == <span class="dig">1</span>:
+                    target.getRegion().<span class="skw">click</span>(location)
+                <span class="kw">elif</span> this.clickType == <span class="dig">2</span>:
+                    target.getRegion().<span class="skw">rightClick</span>(location)
 
             <span class="cmt"># delay</span>
             <span class="skw">wait</span>(delay)
