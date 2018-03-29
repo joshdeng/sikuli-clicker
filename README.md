@@ -1,6 +1,6 @@
-sikuli clicker
+# Sikuli Clicker
 
-#Usage:
+# Usage:
 ```
 import sys
 # script path
