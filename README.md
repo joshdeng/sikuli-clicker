@@ -6,30 +6,30 @@
 # Usage:
 ```
 import sys
-# script path
+# Script path
 myScriptPath = "./"
 
-# check path
+# Check path
 if not myScriptPath in sys.path: sys.path.append(myScriptPath)
 
-# import module
+# Import module
 import clickBot
 reload(clickBot)
 
-# create clicker object 
+# Create clicker object 
 clicker = clickBot.Clicker()
 
-# target obect contains screenshot and region
+# Target obect contains screenshot and region
 target = clickBot.Target(screenshot,region)
 
-# clickWait(target1, target2, nextState, clickType=0, Delay=0) click then wait next target 
-# it keeps click target1 till target2 shows up. 
+# clickWait(target1, target2, nextState, clickType=0, delay=0) 
+# It keeps click target1 till target2 shows up. 
 #    clickType: 
 #       0-> double click 
 #       1-> single click 
 #       2-> right click, 
-#    Delay: 
-#       delay time between each iteration (int, sec)
+#    delay: 
+#       delay time between clicking target1 and checking target2 (int, sec)
       
 clicker.clickWait(target1,target2,1)
 ```
