@@ -58,7 +58,7 @@ class Clicker():
         return time.time() - this.timer
                 
     # public methods
-    def clickWait( this, target, nextTarget, nextState,clickType=0, delay = 0):
+    def clickWait( this, target, nextTarget, nextState,clickType=0, delay=0):
         
         location = None
         # find target
