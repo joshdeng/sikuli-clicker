@@ -2,7 +2,7 @@ from sikuli import *
 import time
 
 # target object (region and image)
-class target():
+class Target():
     def __init__(this, target, region = Region(0,24,1280,777)):
         this.region = region
         this.target = target
