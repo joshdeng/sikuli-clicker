@@ -30,15 +30,12 @@ class Clicker():
         this.state = 0        
         this.timeout = 1
         timer = 0 
-        this.clickType = 0
 
     # getters and setters
     def getState(this):
         return this.state
     def setState(this,state):
         this.state = state
-    def setType(this,clickType):
-        this.clickType = clickType
     
 
     # helper functions
@@ -61,33 +58,32 @@ class Clicker():
         return time.time() - this.timer
                 
     # public methods
-    def clickTarget( this, target, nextTarget, nextState, delay = 0):
+    def clickWait( this, target, nextTarget, nextState,clickType=0, delay = 0):
         
         location = None
         # find target
-        location = this.findTarget(target);
+        location = this.findTarget(target);   
+        if location != None:
 
-        while this.state != nextState :
-            
+            while this.state != nextState :
     
-            # click target
-            if location != None:
-                if this.clickType == 0:
+                # click target
+                if clickType == 0:
                     target.getRegion().doubleClick(location)
-                elif this.clickType == 1:
+                elif clickType == 1:
                     target.getRegion().click(location)
-                elif this.clickType == 2:
+                elif clickType == 2:
                     target.getRegion().rightClick(location)
-
-            # delay
-            wait(delay)
-            
-            # check next state
-            nextLocation = this.findTarget(nextTarget)
-
-            # update state
-            if nextLocation != None:
-                this.state = nextState
+    
+                # delay
+                wait(delay)
+                
+                # check next state
+                nextLocation = this.findTarget(nextTarget)
+    
+                # update state
+                if nextLocation != None:
+                    this.state = nextState
             
        
         
