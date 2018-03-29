@@ -59,11 +59,13 @@ class Clicker():
                 
     # public methods
     def clickTarget( this, target, nextTarget, nextState, delay = 0):
+        
+        location = None
+        # find target
+        location = this.findTarget(target);
 
         while this.state != nextState :
-            location = None
-            # find target
-            location = this.findTarget(target);
+            
     
             # click target
             if location != None:
